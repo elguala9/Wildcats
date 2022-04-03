@@ -732,11 +732,11 @@
 			]
 		},
 		"contracts/Ocelot.sol": {
-			"keccak256": "0x277bd23adaa67ced885767dcc36d26d7a023d0264575f644292d3e5d2ccc2360",
+			"keccak256": "0x4d8717a15febaafa065f2d9c947fe8aca5647d3ea4d4d6e9ac6405d844ff4e08",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://3d6d8f99d5748d1ed0b55d9157009742cd01e3754771923e80301efc0dfd5ad6",
-				"dweb:/ipfs/QmZDsMtDz5xMpAfvCh39aZ9vv2PcDQb6sM1MGwfa4ezwqN"
+				"bzz-raw://97c705b5bb96aa8f99ed64288708a71b5d053abdb02975cdbce28242da7a11b9",
+				"dweb:/ipfs/QmYFWSXAzkMsicGz4tDznaK9FNXYVcnpqvMojy5n3EhR9R"
 			]
 		}
 	},

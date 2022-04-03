@@ -243,6 +243,24 @@
 			{
 				"inputs": [
 					{
+						"internalType": "uint256",
+						"name": "supply",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "uri",
+						"type": "string"
+					}
+				],
+				"name": "createSet",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
 						"internalType": "address",
 						"name": "account",
 						"type": "address"
@@ -465,6 +483,19 @@
 				"type": "function"
 			},
 			{
+				"inputs": [],
+				"name": "sets",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"inputs": [
 					{
 						"internalType": "uint256",
@@ -497,6 +528,19 @@
 						"internalType": "bool",
 						"name": "",
 						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "totalCirculation",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
 					}
 				],
 				"stateMutability": "view",
@@ -666,11 +710,11 @@
 			]
 		},
 		"contracts/Sociable.sol": {
-			"keccak256": "0x12d7d591a5b02371c51d2bf93b95665971974a5557eca904c6326859fbb2b5ac",
+			"keccak256": "0x10daa6ed8d85352c831aae2d21f5ab193ae04230e59ea946dfb92c37fc3e7bad",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://6c5580063da08c52b200af55d678daa6999da0a1d7e660785f292692f42ab2c6",
-				"dweb:/ipfs/QmQfn91TGvjRNZui17SbZmVNAF946nu47Nztf4R4KuxzWs"
+				"bzz-raw://0916c9acfb95c476f519d8a800bf4b938128f1c34a0432b6ba3423d46efe766b",
+				"dweb:/ipfs/QmXCfni4Uf3sahsf4yn7TquUCLUjnGyGB5AoyUKSBeAsgN"
 			]
 		}
 	},

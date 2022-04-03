@@ -54,6 +54,7 @@ contract Ocelot is ERC721URIStorage, Ownable {
 
     // 0 - 199 token ID: custom rare 
     function mintCustomOcelot(address recipient) public onlyOwner{
+        require(_customNFTs < MAX_CUSTOM_NFT, "NFTs are finished");
         _safeMint(recipient, _customNFTs);
         _customNFTs++;
         _mintedNFTs++;
@@ -65,6 +66,7 @@ contract Ocelot is ERC721URIStorage, Ownable {
 
     // 200 - 249 token ID: common reserved
     function mintReservedOcelot(address recipient) public onlyOwner{
+        require(_reservedNFTs < MAX_RESERVED_NFT, "NFTs are finished");
         _safeMint(recipient, _reservedNFTs);
         _reservedNFTs++;
         _mintedNFTs++;
