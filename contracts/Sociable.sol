@@ -65,8 +65,8 @@ contract Sociable is ERC1155, Ownable {
 
         _mint(recipient, set, amount, "");
 
-        _NFTs[set].circulation++;
-        _totalCirculation++;
+        _NFTs[set].circulation+=amount;
+        _totalCirculation+=amount;
     }
 
     // for lazy people that do not want to pass the address

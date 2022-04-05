@@ -710,11 +710,11 @@
 			]
 		},
 		"contracts/Sociable.sol": {
-			"keccak256": "0x10daa6ed8d85352c831aae2d21f5ab193ae04230e59ea946dfb92c37fc3e7bad",
+			"keccak256": "0x4c04ee7028c5081c7d448842e2a09061f6ab3d748e6c8d952dc1e28f0ca1eff3",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://0916c9acfb95c476f519d8a800bf4b938128f1c34a0432b6ba3423d46efe766b",
-				"dweb:/ipfs/QmXCfni4Uf3sahsf4yn7TquUCLUjnGyGB5AoyUKSBeAsgN"
+				"bzz-raw://49069f0da0bffbd3f5c86c3b22d2bf2d1291376ccf0e79cb1d87a3750e2410d2",
+				"dweb:/ipfs/QmQw8RbAaTf6SHNkBMSoff731ivwPmJJmD4EE5pum5rbLw"
 			]
 		}
 	},
