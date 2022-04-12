@@ -266,6 +266,11 @@
 						"internalType": "address",
 						"name": "recipient",
 						"type": "address"
+					},
+					{
+						"internalType": "string",
+						"name": "uri",
+						"type": "string"
 					}
 				],
 				"name": "mintCustomOcelot",
@@ -274,7 +279,13 @@
 				"type": "function"
 			},
 			{
-				"inputs": [],
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "uri",
+						"type": "string"
+					}
+				],
 				"name": "mintCustomOcelot",
 				"outputs": [],
 				"stateMutability": "nonpayable",
@@ -301,7 +312,18 @@
 				"type": "function"
 			},
 			{
-				"inputs": [],
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "recipient",
+						"type": "address"
+					},
+					{
+						"internalType": "string",
+						"name": "uri",
+						"type": "string"
+					}
+				],
 				"name": "mintReservedOcelot",
 				"outputs": [],
 				"stateMutability": "nonpayable",
@@ -310,9 +332,9 @@
 			{
 				"inputs": [
 					{
-						"internalType": "address",
-						"name": "recipient",
-						"type": "address"
+						"internalType": "string",
+						"name": "uri",
+						"type": "string"
 					}
 				],
 				"name": "mintReservedOcelot",
@@ -732,11 +754,11 @@
 			]
 		},
 		"contracts/Ocelot.sol": {
-			"keccak256": "0x4d8717a15febaafa065f2d9c947fe8aca5647d3ea4d4d6e9ac6405d844ff4e08",
+			"keccak256": "0x265c134051f73614a88e313b2c6c2dd2f845b8a90d44da606508869608a8a2d6",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://97c705b5bb96aa8f99ed64288708a71b5d053abdb02975cdbce28242da7a11b9",
-				"dweb:/ipfs/QmYFWSXAzkMsicGz4tDznaK9FNXYVcnpqvMojy5n3EhR9R"
+				"bzz-raw://eea700f4675e7bea5b19d48a6a740ddb2f5d0eadfe0ef6418983d4c60f8484f7",
+				"dweb:/ipfs/QmQPmwGc3z3LnJKCJmT1ovkbPiFfidZVXQp9j1yNZ1J859"
 			]
 		}
 	},
