@@ -95,7 +95,7 @@ contract Sociable is ERC1155, Ownable {
         return _totalCirculation;
     }
 
-
+    
 
 
 }

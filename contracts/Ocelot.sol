@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 
@@ -10,21 +9,19 @@ import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 contract Ocelot is ERC721URIStorage, Ownable {
     // Costants
     uint256 constant NFT_PRICE = 80000000000000; //0.00008 ETH
-    uint16 constant MAX_NORMAL_NFT = 750;
-    uint16 constant MAX_CUSTOM_NFT = 200;
-    uint16 constant MAX_RESERVED_NFT = 50;
+    uint16 constant MAX_NORMAL_NFT = 510;
+    uint16 constant MAX_CUSTOM_NFT = 110;
     // Variables of the contract
     uint256  private _mintedNFTs = 0;
     uint256 private _normalNFTs = 0;
-    uint256 private _reservedNFTs = 0;
     uint256 private _customNFTs = 0;
     uint16 private _availableNFTs = 0;
+    string private _baseUri;
     
 
     // I need the deck full of cards, I do not care the order
-    constructor(string memory name, string memory symbol)   ERC721(name, symbol){
-        _normalNFTs = MAX_RESERVED_NFT+MAX_CUSTOM_NFT;
-        _reservedNFTs = MAX_CUSTOM_NFT;
+    constructor()   ERC721("Ocelot", "OCE"){
+        _normalNFTs = MAX_CUSTOM_NFT;
     }
     
     function withdraw() public onlyOwner {
@@ -42,7 +39,6 @@ contract Ocelot is ERC721URIStorage, Ownable {
         require(_availableNFTs > 0, "No NFTs are available");
         require(NFT_PRICE <= msg.value, "The Ether sent is not enough");
         _safeMint(recipient, _normalNFTs);
-        
         _normalNFTs++;
         _mintedNFTs++;
     }
@@ -53,30 +49,18 @@ contract Ocelot is ERC721URIStorage, Ownable {
     }
 
     // 0 - 199 token ID: custom rare 
-    function mintCustomOcelot(address recipient, string calldata uri) public onlyOwner{
+    function mintCustomOcelot(address recipient) public onlyOwner{
         require(_customNFTs < MAX_CUSTOM_NFT, "NFTs are finished");
         _safeMint(recipient, _customNFTs);
-        _setTokenURI(_customNFTs, uri);
         _customNFTs++;
         _mintedNFTs++;
+        
     }
     // for lazy people that do not want to pass the address
-    function mintCustomOcelot(string calldata uri) public onlyOwner{
-        return mintCustomOcelot(msg.sender, uri);
+    function mintCustomOcelot() public onlyOwner{
+        return mintCustomOcelot(msg.sender);
     }
-
-    // 200 - 249 token ID: common reserved
-    function mintReservedOcelot(address recipient, string calldata uri) public onlyOwner{
-        require(_reservedNFTs < MAX_RESERVED_NFT, "NFTs are finished");
-        _safeMint(recipient, _reservedNFTs);
-        _setTokenURI(_reservedNFTs, uri);
-        _reservedNFTs++;
-        _mintedNFTs++;
-    }
-    // for lazy people that do not want to pass the address
-    function mintReservedOcelot(string calldata uri) public onlyOwner{
-        return mintReservedOcelot(msg.sender, uri);
-    }
+    
 
     // 
     function setUriNFT(uint256 tokenId, string calldata tokenURI) public onlyOwner {
@@ -88,11 +72,7 @@ contract Ocelot is ERC721URIStorage, Ownable {
     }
     // how much normal NFTs are on the chain
     function circulationNormal() public view returns (uint256) {
-        return _normalNFTs- (MAX_RESERVED_NFT+MAX_CUSTOM_NFT);
-    }
-    // how much reserved NFTs are on the chain
-    function circulationReserved() public view returns (uint256) {
-        return _reservedNFTs - MAX_CUSTOM_NFT;
+        return _normalNFTs - MAX_CUSTOM_NFT;
     }
     // how much reserved NFTs are on the chain
     function circulationCustom() public view returns (uint256) {
@@ -101,5 +81,14 @@ contract Ocelot is ERC721URIStorage, Ownable {
     // I need this to start the sale
     function setAvailbleNFTs(uint16 supply) public {
         _availableNFTs += supply;
+    }
+
+    function setBaseUri(string calldata baseUri) public{
+        _baseUri = baseUri;
+    }
+        
+    // OVERRIDE
+    function _baseURI() override internal view virtual returns (string memory) {     
+        return _baseUri;
     }
 }
