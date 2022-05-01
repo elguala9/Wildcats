@@ -82,4 +82,9 @@ contract Ocelot is ERC721, Ownable {
     function availableNFTs() public view returns (uint16) {
         return _availableNFTs;
     }
+
+    //OVERRIDE
+    function _baseURI() internal view override returns (string memory) {
+        return _baseUri;
+    }
 }
