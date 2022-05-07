@@ -42,6 +42,7 @@ contract Ocelot is ERC721, Ownable {
         require(NFT_PRICE <= msg.value, "The Ether sent is not enough");
         _mint(msg.sender, _normalNFTs);
         _normalNFTs++;
+        _availableNFTs--;
     }
 
     // 0 - 199 token ID: custom rare 
@@ -82,6 +83,26 @@ contract Ocelot is ERC721, Ownable {
     function availableNFTs() public view returns (uint16) {
         return _availableNFTs;
     }
+
+    function isCustomOwner(address nft_owner) public view returns (bool){
+        for(uint16 i = 0; i < _customNFTs; i++){
+            if(ownerOf(i) == nft_owner)
+                return true;
+        }
+
+        return false;
+    }
+
+    function isNormalOwner(address nft_owner) public view returns (bool){
+        for(uint16 i = MAX_CUSTOM_NFT; i < MAX_CUSTOM_NFT + _normalNFTs; i++){
+            if(ownerOf(i) == nft_owner)
+                return true;
+        }
+
+        return false;
+    }
+
+    
 
     //OVERRIDE
     function _baseURI() internal view override returns (string memory) {
