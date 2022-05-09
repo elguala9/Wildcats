@@ -21,7 +21,7 @@ contract Ocelot is ERC721, Ownable {
 
     // I need the deck full of cards, I do not care the order
     constructor()   ERC721("Ocelot", "OCE"){
-        _normalNFTs = MAX_CUSTOM_NFT;
+        
     }
     
     function withdraw() public onlyOwner {
@@ -40,7 +40,7 @@ contract Ocelot is ERC721, Ownable {
         require(_normalNFTs < MAX_NORMAL_NFT, "NFTs are finished");
         require(_availableNFTs > 0, "No NFTs are available");
         require(NFT_PRICE <= msg.value, "The Ether sent is not enough");
-        _mint(msg.sender, _normalNFTs);
+        _mint(msg.sender, MAX_CUSTOM_NFT + _normalNFTs);
         _normalNFTs++;
         _availableNFTs--;
     }
@@ -70,7 +70,7 @@ contract Ocelot is ERC721, Ownable {
     //GETTER
     // how much normal NFTs are on the chain
     function circulationNormal() public view returns (uint256) {
-        return _normalNFTs - MAX_CUSTOM_NFT;
+        return _normalNFTs;
     }
     // how much reserved NFTs are on the chain
     function circulationCustom() public view returns (uint256) {
@@ -84,22 +84,24 @@ contract Ocelot is ERC721, Ownable {
         return _availableNFTs;
     }
 
-    function isCustomOwner(address nft_owner) public view returns (bool){
+    function customNftOwned(address nft_owner) public view returns (uint64){
+        uint64 nfts = 0;
         for(uint16 i = 0; i < _customNFTs; i++){
             if(ownerOf(i) == nft_owner)
-                return true;
+                nfts++;
         }
 
-        return false;
+        return nfts;
     }
 
-    function isNormalOwner(address nft_owner) public view returns (bool){
+    function normalNftOwned(address nft_owner) public view returns (uint64){
+        uint64 nfts = 0;
         for(uint16 i = MAX_CUSTOM_NFT; i < MAX_CUSTOM_NFT + _normalNFTs; i++){
             if(ownerOf(i) == nft_owner)
-                return true;
+                nfts++;
         }
 
-        return false;
+        return nfts;
     }
 
     
