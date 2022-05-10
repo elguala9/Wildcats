@@ -84,9 +84,17 @@ contract Ocelot is ERC721, Ownable {
         return _availableNFTs;
     }
 
-    function customNftOwned(address nft_owner) public view returns (uint64){
+    function customNftsOwned(address nft_owner) public view returns (uint64){
+        return nftsOwned(nft_owner, 0, _customNFTs);
+    }
+
+    function normalNftsOwned(address nft_owner) public view returns (uint64){
+        return nftsOwned(nft_owner, MAX_CUSTOM_NFT, _normalNFTs);
+    }
+
+    function nftsOwned(address nft_owner, uint256 start_NFT, uint256 NFTs) private view returns (uint64){
         uint64 nfts = 0;
-        for(uint16 i = 0; i < _customNFTs; i++){
+        for(uint256 i = start_NFT; i < start_NFT + NFTs; i++){
             if(ownerOf(i) == nft_owner)
                 nfts++;
         }
@@ -94,16 +102,13 @@ contract Ocelot is ERC721, Ownable {
         return nfts;
     }
 
-    function normalNftOwned(address nft_owner) public view returns (uint64){
-        uint64 nfts = 0;
-        for(uint16 i = MAX_CUSTOM_NFT; i < MAX_CUSTOM_NFT + _normalNFTs; i++){
-            if(ownerOf(i) == nft_owner)
-                nfts++;
-        }
-
-        return nfts;
+    function maxCustomNFTs() public pure returns (uint16){
+        return MAX_CUSTOM_NFT;
     }
 
+    function maxNormalNFTs() public pure returns (uint16){
+        return MAX_NORMAL_NFT;
+    }
     
 
     //OVERRIDE
