@@ -45,19 +45,15 @@ contract Ocelot is ERC721, Ownable {
         _availableNFTs--;
     }
 
-    function mintOcelot() public payable{
-        mintOcelot(msg.sender); 
-    }
 
     // 0 - 199 token ID: custom rare 
-    function mintCustomOcelot(address recipient) internal onlyOwner{
-        
-        
+    function mintCustomOcelot() internal onlyOwner{
+        mintCustomOcelot(msg.sender);
     }
     // mint the custom Ocelot
-    function mintCustomOcelot() public onlyOwner{
+    function mintCustomOcelot(address recipient) public onlyOwner{
         require(_customNFTs < MAX_CUSTOM_NFT, "NFTs are finished");
-        _mint(msg.sender, _customNFTs);
+        _mint(recipient, _customNFTs);
         _customNFTs++;
     }
     
