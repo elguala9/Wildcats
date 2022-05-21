@@ -37,7 +37,7 @@ contract Ocelot is ERC721, Ownable {
 
     // mint the normal NFT
     function mintOcelot() public payable{
-        require(_normalNFTs + 1 < MAX_NORMAL_NFT, "NFTs are finished");
+        require(_normalNFTs < MAX_NORMAL_NFT, "NFTs are finished");
         require(_availableNFTs > 0, "No NFTs are available");
         require(NFT_PRICE <= msg.value, "The Ether sent is not enough");
         _mint(msg.sender, MAX_CUSTOM_NFT + _normalNFTs);
