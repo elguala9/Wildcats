@@ -39,7 +39,7 @@ contract Ocelot is ERC721, Ownable {
     function mintOcelot() public payable{
         require(_normalNFTs < MAX_NORMAL_NFT, "NFTs are finished");
         require(_availableNFTs > 0, "No NFTs are available");
-        require(NFT_PRICE <= msg.value, "The Ether sent is not enough");
+        //require(NFT_PRICE <= msg.value, "The Ether sent is not enough");
         _mint(msg.sender, MAX_CUSTOM_NFT + _normalNFTs);
         _normalNFTs++;
         _availableNFTs--;
@@ -60,6 +60,7 @@ contract Ocelot is ERC721, Ownable {
     
     // I need this to start the sale
     function setAvailbleNFTs(uint16 supply) public onlyOwner{
+        require(supply + _normalNFTs + _availableNFTs <= MAX_NORMAL_NFT, "Supply bigger than CAP");
         _availableNFTs += supply;
     }
 
