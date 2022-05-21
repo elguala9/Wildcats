@@ -29,7 +29,7 @@ contract Ocelot is ERC721, Ownable {
         payable(msg.sender).transfer(balance);
     }
 
-    function getBalance() public view onlyOwner returns (uint256) {
+    function getBalance() public view returns (uint256) {
         return  address(this).balance;
     }
 
