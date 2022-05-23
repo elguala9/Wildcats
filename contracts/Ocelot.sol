@@ -9,19 +9,18 @@ import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
 contract Ocelot is ERC721, Ownable {
     // Costants
-    uint256 constant NFT_PRICE = 80000000000000; //0.00008 ETH
     uint16 constant MAX_NORMAL_NFT = 510;
     uint16 constant MAX_CUSTOM_NFT = 110;
     // Variables of the contract
+    uint256 private _price;
     uint256 private _normalNFTs = 0;
     uint256 private _customNFTs = 0;
     uint16 private _availableNFTs = 0;
     string private _baseUri;
     
 
-    // I need the deck full of cards, I do not care the order
-    constructor()   ERC721("Ocelot", "OCE"){
-        
+    constructor(uint256 price)   ERC721("Ocelot Society", "OCE"){
+        _price = price;
     }
     
     function withdraw() public onlyOwner {
@@ -33,13 +32,11 @@ contract Ocelot is ERC721, Ownable {
         return  address(this).balance;
     }
 
-    
-
     // mint the normal NFT
     function mintOcelot() public payable{
         require(_normalNFTs < MAX_NORMAL_NFT, "NFTs are finished");
         require(_availableNFTs > 0, "No NFTs are available");
-        require(NFT_PRICE <= msg.value, "The Ether sent is not enough");
+        require(_price <= msg.value, "The Ether sent is not enough");
         _mint(msg.sender, MAX_CUSTOM_NFT + _normalNFTs);
         _normalNFTs++;
         _availableNFTs--;
@@ -64,9 +61,21 @@ contract Ocelot is ERC721, Ownable {
         _availableNFTs += supply;
     }
 
+
+    function setPrice(uint256 price) public onlyOwner{
+        _price = price;
+    }
+
+    function setAvailbleAndPriceNFTs(uint16 supply, uint256 price) public onlyOwner{
+        setAvailbleNFTs(supply);
+        setPrice(price);
+    }
+
     function setBaseUri(string calldata base_uri) public onlyOwner{
         _baseUri = base_uri;
     }
+
+    
 
     //GETTER
     // how much normal NFTs are on the chain
@@ -77,8 +86,8 @@ contract Ocelot is ERC721, Ownable {
     function circulationCustom() public view returns (uint256) {
         return _customNFTs;
     }
-    function getPrice() public pure returns (uint256) {
-        return NFT_PRICE;
+    function getPrice() public view returns (uint256) {
+        return _price;
     }
 
     function availableNFTs() public view returns (uint16) {
