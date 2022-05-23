@@ -19,7 +19,6 @@ contract Sociable is ERC1155, Ownable {
     }
     //variables
     uint256 private _sets = 0;
-    uint256 private _totalCirculation = 0;
     string private _baseURI;
     mapping (uint256 => structNFT) private _NFTs;
 
@@ -34,12 +33,15 @@ contract Sociable is ERC1155, Ownable {
     }
 
     // create a single new set
-    function createSet(uint256 supply/*, string calldata uri*/) public onlyOwner{
+    function createSet(uint256 supply, uint256 price/*, string calldata uri*/) public onlyOwner{      
         uint256 new_set = _sets;
         _sets++;
-        _NFTs[new_set].supply = supply;
+        setSupply(new_set, supply);
+        setPrice(new_set, price);
         //_NFTs[new_set].uri = uri;
     }
+    
+
     // check if the set exist
     function _checkSet(uint256 set) view internal {
         require(set < _sets, "This set does not exist");
@@ -75,11 +77,10 @@ contract Sociable is ERC1155, Ownable {
         require(_NFTs[set].saleIsActive, "Sale not active for the set chosen");
         require( msg.value >= _NFTs[set].price * amount, "The Ether sent is not enough");
         require(_NFTs[set].circulation < _NFTs[set].supply , "No more NFTs are available for the set choosed");
-        require(_NFTs[set].circulation + amount < _NFTs[set].supply , "Amount too high for the current circulation");
+        require(_NFTs[set].circulation + amount <= _NFTs[set].supply , "Amount too high for the current circulation");
 
         _mint(recipient, set, amount, "");
         _NFTs[set].circulation+=amount;
-        _totalCirculation+=amount;
     }
 
     // for lazy people that do not want to pass the address
@@ -104,7 +105,10 @@ contract Sociable is ERC1155, Ownable {
         return _sets;
     }
     function totalCirculation() public view returns (uint256){
-        return _totalCirculation;
+        uint256 circulation = 0;
+        for(uint256 set = 0; set < _sets; set++)
+            circulation+=_NFTs[set].circulation;
+        return circulation;
     }
     function getSet(uint256 set) public view returns (structNFT memory){
         _checkSet(set);
