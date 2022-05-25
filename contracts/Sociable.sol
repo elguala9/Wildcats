@@ -64,10 +64,10 @@ contract Sociable is ERC1155, Ownable {
         _baseURI = uri;
     }
     // active the sale
-    function activeSale(uint256 set) public onlyOwner{
+    function setSale(uint256 set, bool state) public onlyOwner{
         _checkSet(set);
-        require(_NFTs[set].saleIsActive = true, "Sale is already active");
-        _NFTs[set].saleIsActive = true;
+        require(_NFTs[set].saleIsActive != state, "Sale is already in this state");
+        _NFTs[set].saleIsActive = state;
     }
 
     // classic mint function
