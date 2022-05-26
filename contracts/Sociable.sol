@@ -33,7 +33,7 @@ contract Sociable is ERC1155, Ownable {
     }
 
     // create a single new set
-    function createSet(uint256 supply, uint256 price/*, string calldata uri*/) public onlyOwner{      
+    function createSet(uint256 supply, uint256 price) public onlyOwner{      
         uint256 new_set = _sets;
         _sets++;
         setSupply(new_set, supply);
@@ -41,12 +41,6 @@ contract Sociable is ERC1155, Ownable {
         //_NFTs[new_set].uri = uri;
     }
     
-
-    // check if the set exist
-    function _checkSet(uint256 set) view internal {
-        require(set < _sets, "This set does not exist");
-    }
-
     // I can set the supply in every moment
     function setSupply(uint256 set, uint256 supply) public onlyOwner{
         _checkSet(set);
@@ -58,9 +52,7 @@ contract Sociable is ERC1155, Ownable {
         _NFTs[set].price = price;
     }
     // set the uri
-    function setUri(/*uint256 set,*/ string calldata uri) public onlyOwner{
-        /*checkSet(set);
-        _NFTs[set].uri = uri;*/
+    function setUri(string calldata uri) public onlyOwner{
         _baseURI = uri;
     }
     // active the sale
@@ -76,7 +68,7 @@ contract Sociable is ERC1155, Ownable {
         require(amount > 0, "Amount need to be higher than 0");
         require(_NFTs[set].saleIsActive, "Sale not active for the set chosen");
         require( msg.value >= _NFTs[set].price * amount, "The Ether sent is not enough");
-        require(_NFTs[set].circulation < _NFTs[set].supply , "No more NFTs are available for the set choosed");
+        require(_NFTs[set].circulation < _NFTs[set].supply , "No more NFTs are available for the set choose");
         require(_NFTs[set].circulation + amount <= _NFTs[set].supply , "Amount too high for the current circulation");
 
         _mint(recipient, set, amount, "");
@@ -95,6 +87,11 @@ contract Sociable is ERC1155, Ownable {
 
 
     // GET UTILITIES
+    // check if the set exist
+    function _checkSet(uint256 set) view internal {
+        require(set < _sets, "This set does not exist");
+    }
+
     // override the ERC1155 classic function
     function uri(uint256 set) public view override returns (string memory){
         _checkSet(set);
@@ -114,8 +111,5 @@ contract Sociable is ERC1155, Ownable {
         _checkSet(set);
         return _NFTs[set];
     }
-
-    
-
 
 }

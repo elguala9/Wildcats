@@ -28,10 +28,6 @@ contract Ocelot is ERC721, Ownable {
         payable(msg.sender).transfer(balance);
     }
 
-    function getBalance() public view returns (uint256) {
-        return  address(this).balance;
-    }
-
     // mint the normal NFT
     function mintOcelot() public payable{
         require(_normalNFTs < MAX_NORMAL_NFT, "NFTs are finished");
@@ -78,6 +74,10 @@ contract Ocelot is ERC721, Ownable {
     
 
     //GETTER
+    function getBalance() public view returns (uint256) {
+        return  address(this).balance;
+    }
+
     // how much normal NFTs are on the chain
     function circulationNormal() public view returns (uint256) {
         return _normalNFTs;
