@@ -26,13 +26,16 @@ contract Party is ERC1155, Ownable {
     constructor() ERC1155(""){
         _sets = 4;
         _NFTs[0].supply = 20;
-        _NFTs[0].price = 0; //WEI
+        _NFTs[0].price = 2000000000000000000; //WEI
+
         _NFTs[1].supply = 10;
-        _NFTs[1].price = 0; //WEI
+        _NFTs[1].price = 3000000000000000000; //WEI
+
         _NFTs[2].supply = 20;
-        _NFTs[2].price = 0; //WEI
+        _NFTs[2].price = 2000000000000000000; //WEI
+
         _NFTs[3].supply = 10;
-        _NFTs[3].price = 0; //WEI
+        _NFTs[3].price = 3000000000000000000; //WEI
     }
 
     // create a single new set

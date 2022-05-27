@@ -26,9 +26,9 @@ contract Sociable is ERC1155, Ownable {
     constructor() ERC1155(""){
         _sets = 2;
         _NFTs[0].supply = 60;
-        _NFTs[0].price = 0; //WEI
+        _NFTs[0].price = 100000000000000000; //WEI
         _NFTs[1].supply = 30;
-        _NFTs[1].price = 0; //WEI
+        _NFTs[1].price = 250000000000000000; //WEI
 
     }
 
