@@ -9,8 +9,8 @@ import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
 contract Ocelot is ERC721, Ownable {
     // Costants
-    uint16 constant MAX_NORMAL_NFT = 510;
-    uint16 constant MAX_CUSTOM_NFT = 110;
+    uint16 constant MAX_NORMAL_NFT = 500;
+    uint16 constant MAX_CUSTOM_NFT = 108;
     // Variables of the contract
     uint256 private _price;
     uint256 private _normalNFTs = 0;
